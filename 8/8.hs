@@ -3,12 +3,14 @@ intToArray :: Integral t => t -> [t]
 intToArray x
     | x < 10 = [x]
     | otherwise = concat [intToArray(x`quot`10), [x`mod`10]]
-
+    
+prodList :: Num t => [t] -> t
 prodList [] = error "Cannot find the product of an empty list"
 prodList (x:xs)
-    | xs == [] = x
+    | length xs == 0 = x
     | otherwise = x*(prodList xs)
 
+calcAdjProds :: Num a => [a] -> Int -> [a]
 calcAdjProds nums range
     | range < 2 = error "2nd argument to clacAdjProds must be 2 or greater"
     | (length nums) < range = []
