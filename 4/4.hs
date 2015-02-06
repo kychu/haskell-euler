@@ -1,7 +1,8 @@
-intToArray :: Integral t => t -> [t]
-intToArray x
-    | x < 10 = [x]
-    | otherwise = concat [intToArray(x`quot`10), [x`mod`10]]
+{-|
+ - A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+ -
+ - Find the largest palindrome made from the product of two 3-digit numbers.
+ - -}
 
 isPalindrome :: Eq a => [a] -> Bool
 isPalindrome [] = True
@@ -10,8 +11,7 @@ isPalindrome (x:xs)
     | x == (last xs) = isPalindrome (init xs)
     | otherwise = False
 
-multArrays :: Num a => [a] -> [a] -> [a]
-multArrays [] _ = []
-multArrays (x:xs) (ys) = concat [(map (x*) ys), (multArrays xs ys)]
+isIntegerPalindrome = isPalindrome . show
+productsUsingNumbersBetween a b = [ x*y | x <- [a..b], y <- [x..b]]
 
--- maximum [a | a <- (multArrays [100..999] [100..999]), isPalindrome (intToArray a)]
+-- maximum $ filter isIntegerPalindrome (productsUsingNumbersBetween 100 999)
